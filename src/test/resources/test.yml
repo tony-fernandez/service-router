@@ -1,0 +1,24 @@
+pyur:
+    servicerouter:
+        external-services:
+            -
+                context-path: de.xconnect.bus.api
+                name: enghouse
+                endpoint: wswbservice
+        enghouse:
+            context-path: de.xconnect.bus.api
+            default-path: enghouse
+            endpoint: wswbservice
+            servers:
+                -
+                    name: QA1
+                    scheme: http
+                    host: localhost
+                    port: 4040
+                    default-server: true
+                -
+                    name: QA2
+                    scheme: http
+                    host: localhost
+                    port: 5050
+                    default-server: false

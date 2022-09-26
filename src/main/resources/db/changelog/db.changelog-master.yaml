@@ -1,0 +1,106 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1615825659196-1
+      author: tfernandez
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: hibernate_sequence
+            startValue: 1
+  - changeSet:
+      id: 1663516874076-50
+      author: tfernandez
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: routePK
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: is_default
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(20)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: default_uri
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: request_url
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: server_id
+                  type: BIGINT
+            tableName: route
+  - changeSet:
+      id: 1663516874076-51
+      author: tfernandez
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: servicePK
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: context_path
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: endpoint
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(80)
+            tableName: service
+  - changeSet:
+      id: 1663516874076-52
+      author: tfernandez
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: route_name_index
+            tableName: route
+  - changeSet:
+      id: 1663516874076-53
+      author: tfernandez
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: service_name_index
+            tableName: service
+  - changeSet:
+      id: 1663516874076-57
+      author: tfernandez
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: server_id
+            baseTableName: route
+            constraintName: FKhog8najjrjj1yxylo0vuabs35
+            deferrable: false
+            initiallyDeferred: false
+            referencedColumnNames: id
+            referencedTableName: service
+            validate: false
